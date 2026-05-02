@@ -1,0 +1,12 @@
+﻿@model TechBase.Models.Producto
+
+<h2>@Model.Nombre</h2>
+
+<div>
+    <p><strong>Descripción:</strong> @Model.Descripcion</p>
+    <p><strong>Precio:</strong> @Model.Precio €</p>
+    <p><strong>Stock:</strong> @Model.Stock</p>
+    <p><strong>Categoría:</strong> @Model.Categoria.Nombre</p>
+</div>
+
+<a asp-controller="Productos" asp-action="Index">Volver al catálogo</a>
