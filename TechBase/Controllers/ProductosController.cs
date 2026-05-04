@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechBase.Data;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace TechBase.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductosController : Controller
     {
         private readonly ApplicationDbContext _context;

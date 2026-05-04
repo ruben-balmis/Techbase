@@ -1,0 +1,36 @@
+﻿@model List<TechBase.Models.Pedido>
+
+<h2>Gestión de pedidos</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var pedido in Model)
+    {
+        <tr>
+            <td>@pedido.IdPedido</td>
+            <td>@pedido.User?.Email</td>
+            <td>@pedido.Fecha</td>
+            <td>@pedido.Total €</td>
+            <td>@pedido.Estado?.Nombre</td>
+            <td>
+                <span style="color: @(pedido.Estado.Nombre == "Entregado" ? "green" :
+                                    pedido.Estado.Nombre == "En camino" ? "orange" :
+                                    pedido.Estado.Nombre == "Cancelado" ? "red" : "black")">
+                    @pedido.Estado.Nombre
+                </span>
+            </td>
+            <td>
+                <a asp-action="EditarEstado" asp-route-id="@pedido.IdPedido">Editar</a>
+                <a asp-action="Detalle" asp-route-id="@pedido.IdPedido">Ver</a>
+            </td>
+        </tr>
+    }
+</table>

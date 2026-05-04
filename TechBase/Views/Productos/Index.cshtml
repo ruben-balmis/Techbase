@@ -23,5 +23,13 @@
             </div>
 
         </a>
+        <a asp-controller="Carrito"
+           asp-action="Agregar"
+           asp-route-id="@producto.IdProducto"
+           asp-route-nombre="@producto.Nombre"
+           asp-route-precio="@producto.Precio"
+           style="display:block; margin-top:10px; background-color:green; color:white; padding:5px; text-align:center;">
+            Añadir al carrito
+        </a>
     }
 </div>

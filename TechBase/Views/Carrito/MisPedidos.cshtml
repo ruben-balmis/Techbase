@@ -1,0 +1,33 @@
+﻿@model List<TechBase.Models.Pedido>
+
+<h2>Mis pedidos</h2>
+
+@if (!Model.Any())
+{
+    <p>No tienes pedidos</p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+        </tr>
+
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Carrito"
+                       asp-action="DetallePedido"
+                       asp-route-id="@pedido.IdPedido">
+                        @pedido.IdPedido
+                    </a>
+                </td>
+                <td>@pedido.Fecha</td>
+                <td>@pedido.Total €</td>
+            </tr>
+        }
+    </table>
+}

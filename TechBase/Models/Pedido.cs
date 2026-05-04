@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechBase.Models
 {
@@ -12,8 +14,11 @@ namespace TechBase.Models
 
         public decimal Total { get; set; }
 
+        [ForeignKey("UserId")]
+        public IdentityUser? User { get; set; }
+
         // FK usuario (Identity)
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         // FK estado
         public int IdEstado { get; set; }

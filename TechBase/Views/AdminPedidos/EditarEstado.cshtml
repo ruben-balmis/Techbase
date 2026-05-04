@@ -1,0 +1,19 @@
+﻿@model TechBase.Models.Pedido
+
+<h2>Editar estado del pedido</h2>
+
+<form asp-action="EditarEstado">
+    <input type="hidden" name="id" value="@Model.IdPedido" />
+
+    <select name="idEstado">
+        @foreach (var estado in ViewBag.Estados)
+        {
+            <option value="@estado.IdEstado"
+                    selected="@(estado.IdEstado == Model.IdEstado)">
+                @estado.Nombre
+            </option>
+        }
+    </select>
+
+    <button type="submit">Guardar</button>
+</form>
