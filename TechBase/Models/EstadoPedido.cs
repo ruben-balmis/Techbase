@@ -6,10 +6,8 @@ namespace TechBase.Models
     {
         [Key]
         public int IdEstado { get; set; }
-
         [Required]
         public string Nombre { get; set; }
-
         public List<Pedido> Pedidos { get; set; }
     }
 }

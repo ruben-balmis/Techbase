@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechBase")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74cc9f07617542db32c12f89175655dd37fb1d4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bf53c68f3d3dac7d1f682c0230e0a773c1daa54")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechBase")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechBase")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

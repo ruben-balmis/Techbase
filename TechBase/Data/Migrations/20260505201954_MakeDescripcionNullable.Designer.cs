@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechBase.Data;
 
@@ -11,9 +12,11 @@ using TechBase.Data;
 namespace TechBase.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505201954_MakeDescripcionNullable")]
+    partial class MakeDescripcionNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,6 +327,9 @@ namespace TechBase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProducto"));
 
+                    b.Property<int>("CategoriaIdCategoria")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
@@ -345,7 +351,7 @@ namespace TechBase.Data.Migrations
 
                     b.HasKey("IdProducto");
 
-                    b.HasIndex("IdCategoria");
+                    b.HasIndex("CategoriaIdCategoria");
 
                     b.ToTable("Productos");
                 });
@@ -441,7 +447,7 @@ namespace TechBase.Data.Migrations
                 {
                     b.HasOne("TechBase.Models.Categoria", "Categoria")
                         .WithMany("Productos")
-                        .HasForeignKey("IdCategoria")
+                        .HasForeignKey("CategoriaIdCategoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

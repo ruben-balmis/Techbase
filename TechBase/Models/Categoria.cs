@@ -6,11 +6,8 @@ namespace TechBase.Models
     {
         [Key]
         public int IdCategoria { get; set; }
-
         [Required]
         public string Nombre { get; set; }
-
-        // Relación: una categoría tiene muchos productos
         public List<Producto> Productos { get; set; }
     }
 }
