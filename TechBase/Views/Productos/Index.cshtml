@@ -8,31 +8,38 @@
         <a asp-controller="Productos" asp-action="Detalle" asp-route-id="@producto.IdProducto"
            style="text-decoration:none; color:inherit; display:block;">
 
-            <div style="border:1px solid #ccc; padding:15px; width:200px;">
+            <div style="border:1px solid #ccc; padding:15px; width:200px; display:flex; flex-direction:column; justify-content:space-between;">
 
-                <img src="~/images/productos/@producto.ImagenUrl"
-                     style="width:100%; height:150px; object-fit:cover;" />
+                <a asp-controller="Productos" asp-action="Detalle" asp-route-id="@producto.IdProducto"
+                   style="text-decoration:none; color:inherit;">
 
-                <h4>@producto.Nombre</h4>
+                    <img src="~/images/productos/@producto.ImagenUrl"
+                         style="width:100%; height:150px; object-fit:cover;" />
 
-                <p>@producto.Descripcion</p>
+                    <h4>@producto.Nombre</h4>
 
-                <p><strong>@producto.Precio €</strong></p>
+                    <p>@producto.Descripcion</p>
 
-                <p>Stock: @producto.Stock</p>
+                    <p><strong>@producto.Precio €</strong></p>
 
-                <p>Categoría: @producto.Categoria.Nombre</p>
+                    <p>Stock: @producto.Stock</p>
+
+                    <p>Categoría: @producto.Categoria.Nombre</p>
+
+                </a>
+
+                <a asp-controller="Carrito"
+                   asp-action="Agregar"
+                   asp-route-id="@producto.IdProducto"
+                   asp-route-nombre="@producto.Nombre"
+                   asp-route-precio="@producto.Precio"
+                   style="margin-top:10px; background-color:green; color:white; padding:8px; text-align:center; border-radius:5px;">
+                    Añadir al carrito
+                </a>
 
             </div>
 
         </a>
-        <a asp-controller="Carrito"
-           asp-action="Agregar"
-           asp-route-id="@producto.IdProducto"
-           asp-route-nombre="@producto.Nombre"
-           asp-route-precio="@producto.Precio"
-           style="display:block; margin-top:10px; background-color:green; color:white; padding:5px; text-align:center;">
-            Añadir al carrito
-        </a>
+
     }
 </div>

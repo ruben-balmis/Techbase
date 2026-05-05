@@ -12,7 +12,6 @@ using TechBase.Models;
 namespace TechBase.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [Route("admin/productos")]
     public class AdminProductosController : Controller
     {
         private readonly ApplicationDbContext _context;
