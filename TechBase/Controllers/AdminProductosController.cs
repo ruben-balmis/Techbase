@@ -13,23 +13,23 @@ namespace TechBase.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Route("admin/productos")]
-    public class ProductoesController : Controller
+    public class AdminProductosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductoesController(ApplicationDbContext context)
+        public AdminProductosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Productoes
+        // GET: Productos
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Productos.Include(p => p.Categoria);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Productoes/Details/5
+        // GET: Productos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,14 +48,14 @@ namespace TechBase.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Create
+        // GET: Productos/Create
         public IActionResult Create()
         {
             ViewData["IdCategoria"] = new SelectList(_context.Categorias, "IdCategoria", "Nombre");
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: Productos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -72,7 +72,7 @@ namespace TechBase.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Edit/5
+        // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,7 +89,7 @@ namespace TechBase.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Productos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -125,7 +125,7 @@ namespace TechBase.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Delete/5
+        // GET: Productos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,7 +144,7 @@ namespace TechBase.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Delete/5
+        // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

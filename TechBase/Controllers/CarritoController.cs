@@ -6,7 +6,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-
+[Authorize]
 public class CarritoController : Controller
 {
     private const string SessionKey = "Carrito";

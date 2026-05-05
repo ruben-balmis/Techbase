@@ -836,3 +836,4 @@ C:\Users\Usuario\Desktop\Techbase\TechBase\obj\Debug\net9.0\refint\TechBase.dll
 C:\Users\Usuario\Desktop\Techbase\TechBase\obj\Debug\net9.0\TechBase.pdb
 C:\Users\Usuario\Desktop\Techbase\TechBase\obj\Debug\net9.0\TechBase.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\Techbase\TechBase\obj\Debug\net9.0\ref\TechBase.dll
+D:\DAW 2\TFG\TechBase\TechBase\obj\Debug\net9.0\TechBase.sourcelink.json

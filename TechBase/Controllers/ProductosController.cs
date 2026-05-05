@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TechBase.Controllers
 {
-    [Authorize(Roles = "Admin")]
+
     public class ProductosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,6 +24,7 @@ namespace TechBase.Controllers
 
             return View(productos);
         }
+
         public async Task<IActionResult> Detalle(int id)
         {
             var producto = await _context.Productos
@@ -31,9 +32,7 @@ namespace TechBase.Controllers
                 .FirstOrDefaultAsync(p => p.IdProducto == id);
 
             if (producto == null)
-            {
                 return NotFound();
-            }
 
             return View(producto);
         }

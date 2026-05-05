@@ -17,33 +17,49 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddSession();
 
 var app = builder.Build();
+//Roles y seed
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
 
     string[] roles = { "Admin", "User" };
 
     foreach (var role in roles)
     {
-        if (!roleManager.RoleExistsAsync(role).Result)
+        if (!await roleManager.RoleExistsAsync(role))
         {
-            roleManager.CreateAsync(new IdentityRole(role)).Wait();
+            await roleManager.CreateAsync(new IdentityRole(role));
         }
     }
-    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    //Admin automatico
+    var adminEmail = "admin@admin.com";
+    var adminPassword = "Admin123!";
 
-    var user = userManager.FindByEmailAsync("admin1@test.com").Result;
+    var user = await userManager.FindByEmailAsync(adminEmail);
 
-    if (user != null && !userManager.IsInRoleAsync(user, "Admin").Result)
+    if (user == null)
     {
-        userManager.AddToRoleAsync(user, "Admin").Wait();
-    }
-}
+        var newUser = new IdentityUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+        await userManager.CreateAsync(newUser, adminPassword);
+        await userManager.AddToRoleAsync(newUser, "Admin");
+    }
+    else
+    {
+        if (!await userManager.IsInRoleAsync(user, "Admin"))
+        {
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+    }
+
     SeedData.Inicializar(services);
 }
 
@@ -63,6 +79,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
