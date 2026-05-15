@@ -2,19 +2,48 @@
 
 <h2>Catálogo de productos</h2>
 
-<div style="display:flex; flex-wrap:wrap; gap:20px;">
+<form method="get" asp-action="Index" style="margin-bottom:20px;">
+
+    <input type="text"
+           name="buscar"
+           placeholder="Buscar productos..."
+           style="padding:8px; width:250px;" />
+
+    <button type="submit">Buscar</button>
+
+</form>
+
+<div style="margin-bottom:20px;">
+
+    <a asp-action="Index"
+       style="margin-right:10px; text-decoration:none; font-weight:bold;">
+        Todas
+    </a>
+
+    @foreach (var categoria in ViewBag.Categorias)
+    {
+        <a asp-action="Index"
+           asp-route-categoriaId="@categoria.IdCategoria"
+           style="margin-right:10px; text-decoration:none;">
+            @categoria.Nombre
+        </a>
+    }
+
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:30px;justify-content:center;padding:20px;">
     @foreach (var producto in Model)
     {
         <a asp-controller="Productos" asp-action="Detalle" asp-route-id="@producto.IdProducto"
            style="text-decoration:none; color:inherit; display:block;">
 
-            <div style="border:1px solid #ccc; padding:15px; width:200px; display:flex; flex-direction:column; justify-content:space-between;">
-
+            <div style="border:1px solid #ddd;border-radius:12px;padding:15px;width:220px;min-height:500px;display:flex;flex-direction:column;justify-content:space-between;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:0.3s;"
+                 onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.2)'"onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
                 <a asp-controller="Productos" asp-action="Detalle" asp-route-id="@producto.IdProducto"
                    style="text-decoration:none; color:inherit;">
 
                     <img src="~/images/productos/@producto.ImagenUrl"
-                         style="width:100%; height:150px; object-fit:cover;" />
+                         style="width:100%;height:180px;object-fit:containmargin-bottom:10px;" />
 
                     <h4>@producto.Nombre</h4>
 
@@ -33,10 +62,9 @@
                    asp-route-id="@producto.IdProducto"
                    asp-route-nombre="@producto.Nombre"
                    asp-route-precio="@producto.Precio"
-                   style="margin-top:10px; background-color:green; color:white; padding:8px; text-align:center; border-radius:5px;">
+                   style="display:block;margin-top:10pxbackground:#198754;color:whitepadding:10pxtext-align:center;border-radius:8px;text-decoration:nonefont-weight:bold;">
                     Añadir al carrito
                 </a>
-
             </div>
 
         </a>

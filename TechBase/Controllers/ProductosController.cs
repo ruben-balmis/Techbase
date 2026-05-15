@@ -16,13 +16,26 @@ namespace TechBase.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoriaId, string buscar)
         {
-            var productos = await _context.Productos
+            var productos = _context.Productos
                 .Include(p => p.Categoria)
-                .ToListAsync();
+                .AsQueryable();
 
-            return View(productos);
+            if (categoriaId != null)
+            {
+                productos = productos.Where(p => p.IdCategoria == categoriaId);
+            }
+
+            if (!string.IsNullOrEmpty(buscar))
+            {
+                productos = productos.Where(p =>
+                    p.Nombre.Contains(buscar));
+            }
+
+            ViewBag.Categorias = await _context.Categorias.ToListAsync();
+
+            return View(await productos.ToListAsync());
         }
 
         public async Task<IActionResult> Detalle(int id)

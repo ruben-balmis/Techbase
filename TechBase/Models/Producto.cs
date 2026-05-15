@@ -13,7 +13,7 @@ namespace TechBase.Models
         public int Stock { get; set; }
         public int IdCategoria { get; set; }
         [ForeignKey("IdCategoria")]
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
         public string? ImagenUrl { get; set; }
     }
 }

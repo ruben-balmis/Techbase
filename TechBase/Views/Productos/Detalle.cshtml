@@ -1,12 +1,63 @@
 ﻿@model TechBase.Models.Producto
 
-<h2>@Model.Nombre</h2>
+<div style="
+    display:flex;
+    gap:50px;
+    padding:40px;
+    align-items:flex-start;
+">
 
-<div>
-    <p><strong>Descripción:</strong> @Model.Descripcion</p>
-    <p><strong>Precio:</strong> @Model.Precio €</p>
-    <p><strong>Stock:</strong> @Model.Stock</p>
-    <p><strong>Categoría:</strong> @Model.Categoria.Nombre</p>
+    <div style="flex:1; text-align:center;">
+
+        <img src="~/images/productos/@Model.ImagenUrl"
+             style="
+                width:100%;
+                max-width:500px;
+                height:400px;
+                object-fit:contain;
+             " />
+
+    </div>
+
+    <div style="flex:1;">
+
+        <h1>@Model.Nombre</h1>
+
+        <h2 style="color:green; margin-top:20px;">
+            @Model.Precio €
+        </h2>
+
+        <p style="font-size:18px;">
+            <strong>Stock:</strong> @Model.Stock
+        </p>
+
+        <p style="font-size:18px;">
+            <strong>Categoría:</strong> @Model.Categoria.Nombre
+        </p>
+
+        <p style="margin-top:30px; font-size:17px;">
+            @Model.Descripcion
+        </p>
+
+        <a asp-controller="Carrito"
+           asp-action="Agregar"
+           asp-route-id="@Model.IdProducto"
+           asp-route-nombre="@Model.Nombre"
+           asp-route-precio="@Model.Precio"
+           style="
+                display:inline-block;
+                margin-top:30px;
+                background:#198754;
+                color:white;
+                padding:15px 30px;
+                border-radius:10px;
+                text-decoration:none;
+                font-size:18px;
+                font-weight:bold;
+           ">
+            Añadir al carrito
+        </a>
+
+    </div>
+
 </div>
-
-<a asp-controller="Productos" asp-action="Index">Volver al catálogo</a>

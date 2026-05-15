@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DAW 2\\TFG\\TechBase\\TechBase\\TechBase.csproj": {}
+    "C:\\Users\\Usuario\\Desktop\\Techbase\\TechBase\\TechBase.csproj": {}
   },
   "projects": {
-    "D:\\DAW 2\\TFG\\TechBase\\TechBase\\TechBase.csproj": {
+    "C:\\Users\\Usuario\\Desktop\\Techbase\\TechBase\\TechBase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DAW 2\\TFG\\TechBase\\TechBase\\TechBase.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\Techbase\\TechBase\\TechBase.csproj",
         "projectName": "TechBase",
-        "projectPath": "D:\\DAW 2\\TFG\\TechBase\\TechBase\\TechBase.csproj",
-        "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
-        "outputPath": "D:\\DAW 2\\TFG\\TechBase\\TechBase\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Desktop\\Techbase\\TechBase\\TechBase.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Desktop\\Techbase\\TechBase\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ruben\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
