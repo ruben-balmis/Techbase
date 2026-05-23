@@ -1,4 +1,5 @@
 # TechBase Store
+<img width="4000" height="4000" alt="logo" src="https://github.com/user-attachments/assets/02450e5e-0a3b-4d71-b58b-8b5d2717c80f" />
 
 Proyecto desarrollado en ASP.NET Core MVC como tienda online de componentes gaming.
 
