@@ -1,33 +1,111 @@
 ﻿@model List<TechBase.Models.Pedido>
 
-<h2>Mis pedidos</h2>
+@{
+    ViewData["Title"] = "Mis pedidos";
+}
+
+<h1 style="
+    margin-bottom:30px;
+    color:#1f1f1f;
+    font-weight:bold;
+">
+    📦 Mis pedidos
+</h1>
 
 @if (!Model.Any())
 {
-    <p>No tienes pedidos</p>
+    <div style="
+        background:#eef5a4;
+        padding:30px;
+        border-radius:15px;
+        text-align:center;
+        color:#1f1f1f;
+        font-size:20px;
+    ">
+        No tienes pedidos realizados
+    </div>
 }
 else
 {
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Fecha</th>
-            <th>Total</th>
-        </tr>
+    <div style="
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+        ">
 
         @foreach (var pedido in Model)
         {
-            <tr>
-                <td>
-                    <a asp-controller="Carrito"
-                       asp-action="DetallePedido"
-                       asp-route-id="@pedido.IdPedido">
-                        @pedido.IdPedido
-                    </a>
-                </td>
-                <td>@pedido.Fecha</td>
-                <td>@pedido.Total €</td>
-            </tr>
+            decimal total = pedido.Total / 100;
+            <div style="
+                background:#e6ebb2;
+                border-radius:15px;
+                padding:25px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    flex-wrap:wrap;
+                    gap:20px;
+                        ">
+
+                    <div>
+
+                        <h3 style="
+                            margin:0;
+                            color:#1f1f1f;
+                                ">
+                            Pedido #@pedido.IdPedido
+                        </h3>
+
+                        <p style="
+                            margin-top:10px;
+                            font-size:18px;
+                            color:#1f1f1f;
+                                ">
+                            Fecha:
+                            @pedido.Fecha.ToString("dd/MM/yyyy")
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <h2 style="
+                            color:#1f1f1f;
+                            margin:0;
+                                ">
+                            @total.ToString("N2") €
+                        </h2>
+
+                    </div>
+
+                    <div>
+
+                        <a asp-controller="Carrito"
+                           asp-action="DetallePedido"
+                           asp-route-id="@pedido.IdPedido"
+                           style="
+                                background:#1f1f1f;
+                                color:white;
+                                padding:12px 20px;
+                                border-radius:10px;
+                                text-decoration:none;
+                                font-weight:bold;
+                                   ">
+
+                            Ver detalles
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
         }
-    </table>
+
+    </div>
 }

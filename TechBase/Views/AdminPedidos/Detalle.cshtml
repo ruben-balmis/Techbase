@@ -1,23 +1,195 @@
 ﻿@model List<TechBase.Models.DetallePedido>
 
-<h2>Detalle pedido (Admin)</h2>
+@{
+    ViewData["Title"] = "Detalle del pedido";
+}
 
-<p><strong>Usuario:</strong> @ViewBag.Pedido.Usuario?.Email</p>
-<p><strong>Estado:</strong> @ViewBag.Pedido.Estado?.Nombre</p>
+<h1 style="
+    margin-bottom:30px;
+    color:#1f1f1f;
+    font-weight:bold;
+">
+    Detalle del pedido
+</h1>
 
-<table>
-    <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-    </tr>
+<div style="
+    background:#eef5a4;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom:30px;
+">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:20px;
+    ">
+
+        <div>
+
+            <h2 style="
+                color:#1f1f1f;
+                margin-bottom:15px;
+            ">
+                Pedido #@ViewBag.Pedido.IdPedido
+            </h2>
+
+            <p>
+                <strong>Usuario:</strong>
+                @ViewBag.Pedido.User?.Email
+            </p>
+
+            <p>
+                <strong>Fecha:</strong>
+                @ViewBag.Pedido.Fecha.ToString("dd/MM/yyyy")
+            </p>
+
+        </div>
+
+        <div>
+
+            <p>
+                <strong>Estado:</strong>
+            </p>
+
+            @{
+                string colorEstado =
+                ViewBag.Pedido.Estado.Nombre == "Entregado"
+                ? "#198754"
+                : ViewBag.Pedido.Estado.Nombre == "En camino"
+                ? "#fd7e14"
+                : ViewBag.Pedido.Estado.Nombre == "Cancelado"
+                ? "#dc3545"
+                : "#0d6efd";
+            }
+
+            <span style="
+                background:@colorEstado;
+                color:white;
+                padding:10px 18px;
+                border-radius:20px;
+                font-weight:bold;
+            ">
+
+                @ViewBag.Pedido.Estado.Nombre
+
+            </span>
+
+            <h2 style="
+                margin-top:20px;
+                color:#1f1f1f;
+            ">
+                @(((decimal)ViewBag.Pedido.Total / 100).ToString("N2")) €
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div style="
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+">
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Producto.Nombre</td>
-            <td>@item.Cantidad</td>
-            <td>@item.PrecioUnitario €</td>
-        </tr>
+        <div style="
+            background:#e6ebb2;
+            border-radius:15px;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:20px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+            ">
+
+            <div>
+
+                <h3 style="
+                    margin:0;
+                    color:#1f1f1f;
+                    ">
+                    @item.Producto.Nombre
+                </h3>
+
+                <p style="margin-top:10px;">
+                    Cantidad:
+                    <strong>@item.Cantidad</strong>
+                </p>
+
+            </div>
+
+            <div>
+
+                <p style="margin:0;">
+                    Precio unitario
+                </p>
+
+                <h4 style="color:#1f1f1f;">
+                    @(((decimal)item.PrecioUnitario / 100).ToString("N2")) €
+                </h4>
+
+            </div>
+
+            <div>
+
+                <p style="margin:0;">
+                    Total producto
+                </p>
+
+                <h3 style="color:#1f1f1f;">
+                    @((((decimal)item.PrecioUnitario * item.Cantidad) / 100).ToString("N2")) €
+                </h3>
+
+            </div>
+
+        </div>
     }
-</table>
+
+</div>
+
+<div style="
+    margin-top:35px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+">
+
+    <a asp-action="EditarEstado"
+       asp-route-id="@ViewBag.Pedido.IdPedido"
+       style="
+            background:#1f1f1f;
+            color:white;
+            padding:14px 24px;
+            border-radius:12px;
+            text-decoration:none;
+            font-weight:bold;
+       ">
+
+        <i class="bi bi-pencil-square"></i>
+        Editar estado
+
+    </a>
+
+    <a asp-action="Index"
+       style="
+            background:#b2ddeb;
+            color:#1f1f1f;
+            padding:14px 24px;
+            border-radius:12px;
+            text-decoration:none;
+            font-weight:bold;
+       ">
+
+        Volver
+
+    </a>
+
+</div>

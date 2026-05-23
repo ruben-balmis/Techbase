@@ -1,29 +1,142 @@
 ﻿@model List<TechBase.Models.DetallePedido>
 
-<h2>Detalle del pedido</h2>
+@{
+    ViewData["Title"] = "Detalle del pedido";
+}
 
-<p><strong>Pedido:</strong> @ViewBag.Pedido.IdPedido</p>
-<p><strong>Fecha:</strong> @ViewBag.Pedido.Fecha</p>
-<p><strong>Estado:</strong> @ViewBag.Pedido.Estado.Nombre</p>
-<p><strong>Total:</strong> @ViewBag.Pedido.Total €</p>
+<h1 style="
+    margin-bottom:30px;
+    color:#1f1f1f;
+    font-weight:bold;
+">
+    📦 Detalle del pedido
+</h1>
 
-<table>
-    <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio unitario</th>
-        <th>Total</th>
-    </tr>
+<div style="
+    background:#eef5a4;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:30px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:20px;
+    ">
+
+        <div>
+            <h3 style="margin:0; color:#1f1f1f;">
+                Pedido #@ViewBag.Pedido.IdPedido
+            </h3>
+
+            <p style="margin-top:10px;">
+                <strong>Fecha:</strong>
+                @ViewBag.Pedido.Fecha.ToString("dd/MM/yyyy")
+            </p>
+
+            <p>
+                <strong>Estado:</strong>
+                @ViewBag.Pedido.Estado.Nombre
+            </p>
+        </div>
+
+        <div>
+            <h2 style="
+                color:#1f1f1f;
+                margin:0;
+            ">
+                @(((decimal)ViewBag.Pedido.Total / 100).ToString("N2")) €
+            </h2>
+        </div>
+
+    </div>
+
+</div>
+
+<div style="
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+">
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Producto.Nombre</td>
-            <td>@item.Cantidad</td>
-            <td>@item.PrecioUnitario €</td>
-            <td>@(item.Cantidad * item.PrecioUnitario) €</td>
-        </tr>
-    }
-</table>
+        <div style="
+            background:#e6ebb2;
+            border-radius:15px;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:20px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+            ">
 
-<a asp-controller="Carrito" asp-action="MisPedidos">Volver</a>
+            <div>
+
+                <h3 style="
+                    margin:0;
+                    color:#1f1f1f;
+                    ">
+                    @item.Producto.Nombre
+                </h3>
+
+                <p style="margin-top:10px;">
+                    Cantidad: <strong>@item.Cantidad</strong>
+                </p>
+
+            </div>
+
+            <div>
+
+                <p style="margin:0;">
+                    Precio unitario
+                </p>
+
+                <h4 style="color:#1f1f1f;">
+                    @((@item.PrecioUnitario / 100).ToString("N2")) €
+                </h4>
+
+            </div>
+
+            <div>
+
+                <p style="margin:0;">
+                    Total producto
+                </p>
+
+                <h3 style="color:#1f1f1f;">
+                    @(((item.Cantidad * item.PrecioUnitario) / 100).ToString("N2")) €
+                </h3>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<div style="
+    margin-top:30px;
+">
+
+    <a asp-controller="Carrito"
+       asp-action="MisPedidos"
+       style="
+            background:#1f1f1f;
+            color:white;
+            padding:12px 22px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:bold;
+       ">
+
+        Volver a mis pedidos
+
+    </a>
+
+</div>

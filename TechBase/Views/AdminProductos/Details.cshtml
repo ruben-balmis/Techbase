@@ -1,57 +1,156 @@
 ﻿@model TechBase.Models.Producto
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Detalles del producto";
 }
 
-<!DOCTYPE html>
+<h1 style="
+    margin-bottom:30px;
+    color:#1f1f1f;
+    font-weight:bold;
+">
+    Detalles del producto
+</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+<div style="
+    background:#e6ebb2;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+">
 
-<div>
-    <h4>Producto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nombre)
-        </dd>
-    </dl>
+    <div style="
+        display:flex;
+        gap:40px;
+        flex-wrap:wrap;
+        align-items:flex-start;
+    ">
+
+        <div>
+
+            <img src="~/images/productos/@Model.ImagenUrl"
+                 style="
+                    width:300px;
+                    height:300px;
+                    object-fit:contain;
+                    background:white;
+                    border-radius:15px;
+                    padding:20px;
+                 " />
+
+        </div>
+
+        <div style="flex:1;">
+
+            <h2 style="
+                color:#1f1f1f;
+                margin-bottom:25px;
+            ">
+                @Model.Nombre
+            </h2>
+
+            <div style="
+                display:flex;
+                flex-direction:column;
+                gap:18px;
+                font-size:18px;
+            ">
+
+                <div>
+                    <strong>Precio:</strong>
+                    @Model.Precio.ToString("N2") €
+                </div>
+
+                <div>
+                    <strong>Stock:</strong>
+                    @Model.Stock
+                </div>
+
+                <div>
+                    <strong>Categoría:</strong>
+                    @Model.Categoria.Nombre
+                </div>
+
+                <div>
+                    <strong>Imagen:</strong>
+                    @Model.ImagenUrl
+                </div>
+
+            </div>
+
+            <div style="
+                margin-top:30px;
+            ">
+
+                <h4 style="
+                    color:#1f1f1f;
+                    margin-bottom:15px;
+                ">
+                    Descripción
+                </h4>
+
+                <div style="
+                    background:white;
+                    padding:20px;
+                    border-radius:12px;
+                    color:#444;
+                    line-height:1.6;
+                ">
+
+                    @if (string.IsNullOrEmpty(Model.Descripcion))
+                    {
+                        <span>No hay descripción disponible.</span>
+                    }
+                    else
+                    {
+                        @Model.Descripcion
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="
+        margin-top:35px;
+        display:flex;
+        gap:15px;
+        flex-wrap:wrap;
+    ">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.IdProducto"
+           style="
+                background:#1f1f1f;
+                color:white;
+                padding:14px 24px;
+                border-radius:12px;
+                text-decoration:none;
+                font-weight:bold;
+           ">
+
+            <i class="bi bi-pencil-square"></i>
+            Editar producto
+
+        </a>
+
+        <a asp-action="Index"
+           style="
+                background:#b2ddeb;
+                color:#1f1f1f;
+                padding:14px 24px;
+                border-radius:12px;
+                text-decoration:none;
+                font-weight:bold;
+           ">
+
+            Volver
+
+        </a>
+
+    </div>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdProducto">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-</body>
-</html>

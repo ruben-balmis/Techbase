@@ -1,49 +1,169 @@
 ﻿@model List<TechBase.Models.CarritoItem>
 
-<h2>Carrito</h2>
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<h1 style="
+    margin-bottom:30px;
+    color:#1f1f1f;
+    font-weight:bold;
+">
+    <i class="bi bi-cart3"></i> Tu carrito
+</h1>
 
 @if (!Model.Any())
 {
-    <p>El carrito está vacío</p>
+    <div style="
+        background:#eef5a4;
+        padding:30px;
+        border-radius:15px;
+        text-align:center;
+        color:#1f1f1f;
+        font-size:20px;
+    ">
+        El carrito está vacío
+    </div>
 }
 else
 {
-    <table>
-        <th>Acciones</th>
-        <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-        </tr>
+    decimal total = 0;
+
+    <div style="
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+    ">
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Precio €</td>
-                <td>
-                    <a asp-controller="Carrito" asp-action="Restar" asp-route-id="@item.IdProducto">➖</a>
+            decimal precio = item.Precio / 100;
+            total +=  precio * item.Cantidad;
 
-                    @item.Cantidad
+            <div style="
+                background:#e6ebb2;
+                border-radius:15px;
+                padding:20px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    ">
 
-                    <a asp-controller="Carrito" asp-action="Sumar" asp-route-id="@item.IdProducto">➕</a>
-                </td>
-            </tr>
-            <td>
-                <a asp-controller="Carrito"
-                   asp-action="Eliminar"
-                   asp-route-id="@item.IdProducto"
-                   style="color:red;">
-                    Eliminar
-                </a>
-            </td>
+                <div>
+
+                    <h3 style="
+                        margin:0;
+                        color:#1f1f1f;
+                            ">
+                        @item.Nombre
+                    </h3>
+
+                    <p style="
+                        margin-top:10px;
+                        font-size:18px;
+                            ">
+                        <strong>@precio.ToString("N2")  €</strong>
+                    </p>
+
+                </div>
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                        ">
+
+                    <a asp-controller="Carrito"
+                       asp-action="Restar"
+                       asp-route-id="@item.IdProducto"
+                       style="
+                            background:#b2ddeb;
+                            color:#1f1f1f;
+                            text-decoration:none;
+                            padding:8px 14px;
+                            border-radius:10px;
+                            font-weight:bold;
+                               ">
+                        <i class="bi bi-dash-lg"></i>
+                    </a>
+
+                    <span style="
+                        font-size:20px;
+                        font-weight:bold;
+                        color:#1f1f1f;
+                            ">
+                        @item.Cantidad
+                    </span>
+
+                    <a asp-controller="Carrito"
+                       asp-action="Sumar"
+                       asp-route-id="@item.IdProducto"
+                       style="
+                            background:#b2ddeb;
+                            color:#1f1f1f;
+                            text-decoration:none;
+                            padding:8px 14px;
+                            border-radius:10px;
+                            font-weight:bold;
+                               ">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+
+                </div>
+
+                <div>
+
+                    <a asp-controller="Carrito"
+                       asp-action="Eliminar"
+                       asp-route-id="@item.IdProducto"
+                       style="
+                            background:#1f1f1f;
+                            color:white;
+                            text-decoration:none;
+                            padding:10px 18px;
+                            border-radius:10px;
+                            font-weight:bold;
+                               ">
+                        Eliminar
+                    </a>
+
+                </div>
+
+            </div>
         }
-    </table>
-}
-@if (Model.Any())
-{
-    <a asp-controller="Carrito" asp-action="Confirmar"
-       style="display:block; margin-top:20px; background-color:green; color:white; padding:10px; text-align:center;">
-        Confirmar pedido
-    </a>
+
+    </div>
+
+    <div style="
+        margin-top:40px;
+        background:#eef5a4;
+        padding:25px;
+        border-radius:15px;
+        text-align:right;
+        ">
+
+        <h2 style="color:#1f1f1f;">
+            Total: @total.ToString("N2") €
+        </h2>
+
+        <a asp-controller="Carrito"
+           asp-action="Confirmar"
+           style="
+                display:inline-block;
+                margin-top:15px;
+                background:#1f1f1f;
+                color:white;
+                padding:15px 30px;
+                border-radius:12px;
+                text-decoration:none;
+                font-size:18px;
+                font-weight:bold;
+               ">
+
+            Confirmar pedido
+
+        </a>
+
+    </div>
 }
