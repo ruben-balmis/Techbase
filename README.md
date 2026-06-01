@@ -176,7 +176,7 @@ Ctrl + F5
 ## Administrador
 
 ```plaintext
-Email: admin@techbase.com
+Email: admin@admin.com
 Password: Admin123!
 ```
 
